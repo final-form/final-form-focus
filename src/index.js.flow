@@ -1,0 +1,9 @@
+// @flow
+import type { Decorator } from 'final-form'
+import type { GetInputs } from './types'
+
+declare export default function createDecorator(
+  getInputs?: GetInputs
+): Decorator
+
+declare export function getFormInputs(name: string): GetInputs

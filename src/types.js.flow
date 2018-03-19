@@ -1,0 +1,4 @@
+// @flow
+type FocusableInput = { name: string, focus: () => void }
+
+export type GetInputs = () => FocusableInput[]
