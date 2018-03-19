@@ -68,7 +68,7 @@ const undecorate = decorator(form)
 
 ```js
 import React from 'react'
-import { Form, Field } from 'react-final-form
+import { Form, Field } from 'react-final-form'
 import createDecorator from 'final-form-focus'
 
 const focusOnErrors = createDecorator()
