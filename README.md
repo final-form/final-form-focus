@@ -93,6 +93,8 @@ const focusOnErrors = createDecorator()
 
 Demonstrates how 🏁 Final Form Focus 🧐 works with [🏁 React Final Form](https://github.com/final-form/react-final-form#-react-final-form).
 
+[![Demo](demo.gif)](https://codesandbox.io/s/6174kqr403)
+
 ## API
 
 ### `createDecorator: (getInputs?: GetInputs) => Decorator`
