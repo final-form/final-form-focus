@@ -11,6 +11,10 @@ will attempt to apply focus to the first field with an error upon an attempted f
 
 ---
 
+[![Demo](demo.gif)](https://codesandbox.io/s/6174kqr403)
+
+---
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -92,8 +96,6 @@ const focusOnErrors = createDecorator()
 ### [Focus On Error Example](https://codesandbox.io/s/6174kqr403)
 
 Demonstrates how 🏁 Final Form Focus 🧐 works with [🏁 React Final Form](https://github.com/final-form/react-final-form#-react-final-form).
-
-[![Demo](demo.gif)](https://codesandbox.io/s/6174kqr403)
 
 ## API
 
