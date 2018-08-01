@@ -1,19 +1,21 @@
 // @flow
 import type { Decorator, FormApi } from 'final-form'
-import type { GetInputs } from './types'
-import { getIn } from 'final-form'
+import type { GetInputs, FindInput } from './types'
 import getAllInputs from './getAllInputs'
+import defaultFindInput from './findInput'
 
-const createDecorator = (getInputs?: GetInputs): Decorator => (
-  form: FormApi
-) => {
+const createDecorator = (
+  getInputs?: GetInputs,
+  findInput?: FindInput
+): Decorator => (form: FormApi) => {
   const focusOnFirstError = (errors: Object) => {
     if (!getInputs) {
       getInputs = getAllInputs
     }
-    const firstInput = getInputs().find(
-      input => input.name && getIn(errors, input.name)
-    )
+    if (!findInput) {
+      findInput = defaultFindInput
+    }
+    const firstInput = findInput(getInputs(), errors)
     if (firstInput) {
       firstInput.focus()
     }

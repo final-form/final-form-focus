@@ -28,11 +28,12 @@ will attempt to apply focus to the first field with an error upon an attempted f
 * [Example](#example)
   * [Focus On Error Example](#focus-on-error-example)
 * [API](#api)
-  * [`createDecorator: (getInputs?: GetInputs) => Decorator`](#createdecorator-getinputs-getinputs--decorator)
+  * [`createDecorator: (getInputs?: GetInputs, findInput?: FindInput) => Decorator`](#createdecorator-getinputs-getinputs-findinput-findinput--decorator)
   * [`getFormInputs: (formName: string) => GetInputs`](#getforminputs-formname-string--getinputs)
 * [Types](#types)
   * [`FocusableInput: { name: string, focus: () => void }`](#focusableinput--name-string-focus---void-)
   * [`GetInputs: () => FocusableInput[]`](#getinputs---focusableinput)
+  * [`FindInput: (FocusableInput[], {}) => ?FocusableInput`](#findinput-focusableinput---focusableinput)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -99,9 +100,9 @@ Demonstrates how 🏁 Final Form Focus 🧐 works with [🏁 React Final Form](h
 
 ## API
 
-### `createDecorator: (getInputs?: GetInputs) => Decorator`
+### `createDecorator: (getInputs?: GetInputs, findInput?: FindInput) => Decorator`
 
-A function that takes an optional function to collect a list of focusable inputs on the page and provides a 🏁 Final Form [`Decorator`](https://github.com/final-form/final-form#decorator-form-formapi--unsubscribe) that will focus on the top-most input on the page with an error when a form submission fails. If no `getInputs` parameter is provided, it will use a generic one that will look for matches among all inputs that appear in `document.forms`.
+A function that takes an optional function to collect a list of focusable inputs on the page and provides a 🏁 Final Form [`Decorator`](https://github.com/final-form/final-form#decorator-form-formapi--unsubscribe) that will focus on the top-most input on the page with an error when a form submission fails. If no `getInputs` parameter is provided, it will use a generic one that will return all inputs that appear in `document.forms`. If no `findInput` parameter is provided, it will use a generic one that matches the name attribute of the focusable input with the path in the error object.
 
 ### `getFormInputs: (formName: string) => GetInputs`
 
@@ -116,3 +117,7 @@ A light abstraction of any input that has a `name` property and upon which `focu
 ### `GetInputs: () => FocusableInput[]`
 
 A function that collects a list of focusable inputs that exist on the page.
+
+### `FindInput: (FocusableInput[], {}) => ?FocusableInput`
+
+A function that returns the first element in a list of focusable inputs that has an error
