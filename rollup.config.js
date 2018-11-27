@@ -53,10 +53,7 @@ export default {
     flow(),
     commonjs({ include: 'node_modules/**' }),
     babel({
-      exclude: 'node_modules/**',
-      babelrc: false,
-      presets: [['env', { modules: false }], 'stage-2'],
-      plugins: ['external-helpers']
+      exclude: 'node_modules/**'
     }),
     umd
       ? replace({
