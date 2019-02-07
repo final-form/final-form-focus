@@ -4,6 +4,8 @@ import type { GetInputs, FindInput } from './types'
 import getAllInputs from './getAllInputs'
 import defaultFindInput from './findInput'
 
+const noop = () => {}
+
 const createDecorator = (
   getInputs?: GetInputs,
   findInput?: FindInput
@@ -47,7 +49,7 @@ const createDecorator = (
     const result = originalSubmit.call(form)
     if (result && typeof result.then === 'function') {
       // async
-      result.then(afterSubmit)
+      result.then(afterSubmit, noop)
     } else {
       // sync
       afterSubmit()
