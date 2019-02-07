@@ -1,6 +1,6 @@
 {
   "name": "final-form-focus",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Decorator that will attempt to apply focus to the first field with an error upon an attempted form submission in 🏁 Final Form",
   "main": "dist/final-form-focus.cjs.js",
   "jsnext:main": "dist/final-form-focus.es.js",
