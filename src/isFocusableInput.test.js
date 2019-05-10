@@ -14,4 +14,8 @@ describe('isFocusableInput', () => {
   it('should return true for an object with a focus method', () => {
     expect(isFocusableInput({ focus: () => {} })).toBe(true)
   })
+
+  it('should return false for a button', () => {
+    expect(isFocusableInput(document.createElement('button'))).toBe(false)
+  })
 })
