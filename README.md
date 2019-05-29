@@ -7,7 +7,7 @@
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 Decorator for [🏁 Final Form](https://github.com/final-form/final-form) that
-will attempt to apply focus to the first field with an error upon an attempted form submission.
+will attempt to apply focus to the first field with specific name with an error among all forms upon an attempted form submission.
 
 ---
 
@@ -97,6 +97,10 @@ const focusOnErrors = createDecorator()
 ### [Focus On Error Example](https://codesandbox.io/s/6174kqr403)
 
 Demonstrates how 🏁 Final Form Focus 🧐 works with [🏁 React Final Form](https://github.com/final-form/react-final-form#-react-final-form).
+
+### [Focus On Errors With Multiple Forms Example](https://codesandbox.io/embed/react-final-form-focus-on-first-error-hvzhm)
+
+Demonstrates how to use `getFormInputs` from 🏁 Final Form Focus 🧐 to works with multiple [🏁 React Final Form](https://github.com/final-form/react-final-form#-react-final-form).
 
 ## API
 
