@@ -25,18 +25,9 @@ const createDecorator = (
   // Save original submit function
   const originalSubmit = form.submit
 
-  // Subscribe to errors, and keep a local copy of them
-  let state: { errors?: Object, submitErrors?: Object } = {}
-  const unsubscribe = form.subscribe(
-    nextState => {
-      state = nextState
-    },
-    { errors: true, submitErrors: true }
-  )
-
   // What to do after submit
   const afterSubmit = () => {
-    const { errors, submitErrors } = state
+    const { errors, submitErrors } = form.getState()
     if (errors && Object.keys(errors).length) {
       focusOnFirstError(errors)
     } else if (submitErrors && Object.keys(submitErrors).length) {
@@ -58,7 +49,6 @@ const createDecorator = (
   }
 
   return () => {
-    unsubscribe()
     form.submit = originalSubmit
   }
 }
