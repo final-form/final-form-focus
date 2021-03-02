@@ -1,14 +1,16 @@
 // @flow
 import type { Decorator, FormApi } from 'final-form'
-import type { GetInputs, FindInput } from './types'
+import type { GetInputs, FindInput, FocusInput } from './types'
 import getAllInputs from './getAllInputs'
 import defaultFindInput from './findInput'
+import defaultFocus from './focusInput'
 
 const noop = () => {}
 
 const createDecorator = (
   getInputs?: GetInputs,
-  findInput?: FindInput
+  findInput?: FindInput,
+  focus?: FocusInput
 ): Decorator => (form: FormApi) => {
   const focusOnFirstError = (errors: Object) => {
     if (!getInputs) {
@@ -17,9 +19,12 @@ const createDecorator = (
     if (!findInput) {
       findInput = defaultFindInput
     }
+    if (!focus) {
+      focus = defaultFocus
+    }
     const firstInput = findInput(getInputs(), errors)
     if (firstInput) {
-      firstInput.focus()
+      focus(firstInput)
     }
   }
   // Save original submit function
