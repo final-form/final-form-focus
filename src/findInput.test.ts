@@ -1,8 +1,9 @@
 import findInput from './findInput'
+import { FocusableInput } from './types'
 
 const errors = { erroneousPath: 'errorMessage' }
-const nonErroneousElement = { name: 'noerror', focus: () => {} }
-const erroneousElement = { name: 'erroneousPath', focus: () => {} }
+const nonErroneousElement: FocusableInput = { name: 'noerror', focus: () => { } }
+const erroneousElement: FocusableInput = { name: 'erroneousPath', focus: () => { } }
 
 describe('findInput', () => {
   it('should return undefined when an empty array is given', () => {
@@ -24,4 +25,4 @@ describe('findInput', () => {
       erroneousElement
     )
   })
-})
+}) 

@@ -2,7 +2,6 @@
 *.iml
 .nyc_output
 coverage
-flow-coverage
 node_modules
 dist
 lib
