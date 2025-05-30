@@ -1,10 +1,11 @@
 import resolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
-import flow from 'rollup-plugin-flow'
 import commonjs from 'rollup-plugin-commonjs'
 import { uglify } from 'rollup-plugin-uglify'
 import replace from 'rollup-plugin-replace'
-import pkg from './package.json'
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+const pkg = require('./package.json')
 
 const minify = process.env.MINIFY
 const format = process.env.FORMAT
@@ -34,7 +35,7 @@ if (es) {
 }
 
 export default {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: Object.assign(
     {
       name: 'final-form-focus',
@@ -49,29 +50,36 @@ export default {
         ...Object.keys(pkg.peerDependencies || {})
       ],
   plugins: [
-    resolve({ jsnext: true, main: true }),
-    flow(),
+    resolve({
+      mainFields: ['module', 'main'],
+      extensions: ['.js', '.ts']
+    }),
     commonjs({ include: 'node_modules/**' }),
     babel({
       exclude: 'node_modules/**',
       babelrc: false,
       runtimeHelpers: true,
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
       presets: [
         [
           '@babel/preset-env',
           {
             modules: false,
-            loose: true
+            loose: false
           }
         ],
-        '@babel/preset-flow'
+        '@babel/preset-typescript'
       ],
       plugins: [
         ['@babel/plugin-transform-runtime', { useESModules: !cjs }],
-        '@babel/plugin-transform-flow-strip-types',
         '@babel/plugin-syntax-dynamic-import',
         '@babel/plugin-syntax-import-meta',
-        '@babel/plugin-proposal-class-properties',
+        ['@babel/plugin-proposal-class-properties', { loose: false }],
+        ['@babel/plugin-transform-private-methods', { loose: false }],
+        [
+          '@babel/plugin-transform-private-property-in-object',
+          { loose: false }
+        ],
         '@babel/plugin-proposal-json-strings',
         [
           '@babel/plugin-proposal-decorators',
