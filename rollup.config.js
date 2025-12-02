@@ -1,8 +1,8 @@
-import resolve from 'rollup-plugin-node-resolve'
-import babel from 'rollup-plugin-babel'
-import commonjs from 'rollup-plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+import babel from '@rollup/plugin-babel'
+import commonjs from '@rollup/plugin-commonjs'
 import { uglify } from 'rollup-plugin-uglify'
-import replace from 'rollup-plugin-replace'
+import replace from '@rollup/plugin-replace'
 import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 const pkg = require('./package.json')
@@ -27,7 +27,7 @@ if (es) {
     output = { file: `dist/final-form-focus.umd.js`, format: 'umd' }
   }
 } else if (cjs) {
-  output = { file: `dist/final-form-focus.cjs.js`, format: 'cjs' }
+  output = { file: `dist/final-form-focus.cjs`, format: 'cjs' }
 } else if (format) {
   throw new Error(`invalid format specified: "${format}".`)
 } else {
@@ -58,7 +58,7 @@ export default {
     babel({
       exclude: 'node_modules/**',
       babelrc: false,
-      runtimeHelpers: true,
+      babelHelpers: 'runtime',
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       presets: [
         [
@@ -95,6 +95,7 @@ export default {
     }),
     umd
       ? replace({
+          preventAssignment: true,
           'process.env.NODE_ENV': JSON.stringify(
             minify ? 'production' : 'development'
           )
