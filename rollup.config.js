@@ -1,6 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
+import typescript from '@rollup/plugin-typescript'
 import { uglify } from 'rollup-plugin-uglify'
 import replace from 'rollup-plugin-replace'
 import { createRequire } from 'module'
@@ -53,6 +54,11 @@ export default {
     resolve({
       mainFields: ['module', 'main'],
       extensions: ['.js', '.ts']
+    }),
+    typescript({
+      tsconfig: './tsconfig.build.json',
+      declaration: true,
+      declarationMap: true
     }),
     commonjs({ include: 'node_modules/**' }),
     babel({

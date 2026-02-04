@@ -5,6 +5,7 @@
     "lib": ["dom", "esnext"],
     "declaration": true,
     "declarationMap": true,
+    "declarationDir": "./dist",
     "sourceMap": true,
     "outDir": "./dist",
     "strict": true,
