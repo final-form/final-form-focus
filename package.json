@@ -2,16 +2,22 @@
   "name": "final-form-focus",
   "version": "2.0.0",
   "description": "Decorator that will attempt to apply focus to the first field with an error upon an attempted form submission in 🏁 Final Form",
-  "main": "dist/final-form-focus.cjs.js",
+  "main": "dist/final-form-focus.cjs",
   "jsnext:main": "dist/final-form-focus.es.js",
   "module": "dist/final-form-focus.es.js",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/final-form-focus.es.js",
+      "require": "./dist/final-form-focus.cjs"
+    }
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "start": "nps",
-    "test": "nps test",
+    "start": "nps -c ./package-scripts.cjs",
+    "test": "nps -c ./package-scripts.cjs test",
     "precommit": "lint-staged && npm start validate"
   },
   "author": "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)",
@@ -41,21 +47,24 @@
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-typescript": "^7.27.1",
     "@eslint/js": "^9.27.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.15.27",
     "@typescript-eslint/eslint-plugin": "^8.33.0",
     "@typescript-eslint/parser": "^8.33.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.1.0",
     "babel-jest": "^29.7.0",
     "bundlesize": "^0.18.2",
     "doctoc": "^2.2.1",
     "eslint": "^9.27.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-babel": "^5.3.1",
+    "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "final-form": "^5.0.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
@@ -66,10 +75,6 @@
     "prettier": "^3.5.3",
     "prettier-eslint-cli": "^8.0.1",
     "rollup": "^4.41.1",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-uglify": "^6.0.4",
     "typescript": "^5.8.3"
   },
@@ -92,7 +97,7 @@
       "threshold": "1.2kB"
     },
     {
-      "path": "dist/final-form-focus.cjs.js",
+      "path": "dist/final-form-focus.cjs",
       "threshold": "1.2kB"
     }
   ]

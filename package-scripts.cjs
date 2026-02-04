@@ -1,8 +1,10 @@
-import npsUtils from 'nps-utils'
+const npsUtils = require('nps-utils')
 
-const { series, rimraf, concurrent } = npsUtils
+const { series, rimraf } = npsUtils
 
-export default {
+const nps = (script) => `nps -c ./package-scripts.cjs ${script}`
+
+module.exports = {
   scripts: {
     test: {
       default: 'jest --coverage',
@@ -17,14 +19,14 @@ export default {
     },
     build: {
       description: 'delete the dist directory and run all builds',
-      default: series(rimraf('dist'), 'nps build.rollup'),
+      default: series(rimraf('dist'), nps('build.rollup')),
       rollup: {
         description: 'Run all rollup builds sequentially',
-        default: series.nps(
-          'build.rollup.es',
-          'build.rollup.cjs',
-          'build.rollup.umd.main',
-          'build.rollup.umd.min'
+        default: series(
+          nps('build.rollup.es'),
+          nps('build.rollup.cjs'),
+          nps('build.rollup.umd.main'),
+          nps('build.rollup.umd.min')
         ),
         es: {
           description: 'run the build with rollup (uses rollup.config.js)',
@@ -47,7 +49,7 @@ export default {
           }
         }
       },
-      andTest: series.nps('build', 'test.size')
+      andTest: series(nps('build'), nps('test.size'))
     },
     docs: {
       description: 'Generates table of contents in README',
@@ -65,7 +67,7 @@ export default {
     validate: {
       description:
         'This runs several scripts to make sure things look good before committing or on clean install',
-      default: series.nps('lint', 'build.andTest', 'test')
+      default: series(nps('lint'), nps('build.andTest'), nps('test'))
     },
     clean: {
       description: 'delete the dist directory',

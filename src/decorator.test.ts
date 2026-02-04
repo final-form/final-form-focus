@@ -1,5 +1,5 @@
-import createDecorator from './decorator'
 import { createForm } from 'final-form'
+import createDecorator from './decorator'
 import { FocusableInput } from './types'
 
 const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms))
