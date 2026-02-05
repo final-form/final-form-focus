@@ -50,7 +50,7 @@ export default {
       andTest: series.nps('build', 'test.size')
     },
     copyTypes: {
-      description: 'Copy TypeScript declaration files to dist',
+      description: 'Generate TypeScript declaration files to dist',
       script: 'tsc --declaration --emitDeclarationOnly --outDir dist'
     },
     docs: {
