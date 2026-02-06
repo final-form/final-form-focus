@@ -6,6 +6,7 @@
   "jsnext:main": "dist/final-form-focus.es.js",
   "module": "dist/final-form-focus.es.js",
   "type": "module",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],

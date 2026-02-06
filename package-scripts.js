@@ -17,7 +17,7 @@ export default {
     },
     build: {
       description: 'delete the dist directory and run all builds',
-      default: series(rimraf('dist'), 'nps build.rollup'),
+      default: series(rimraf('dist'), 'nps build.rollup', 'nps copyTypes'),
       rollup: {
         description: 'Run all rollup builds sequentially',
         default: series.nps(
@@ -48,6 +48,10 @@ export default {
         }
       },
       andTest: series.nps('build', 'test.size')
+    },
+    copyTypes: {
+      description: 'Generate TypeScript declaration files to dist',
+      script: 'tsc --declaration --emitDeclarationOnly --outDir dist'
     },
     docs: {
       description: 'Generates table of contents in README',
