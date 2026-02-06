@@ -7,5 +7,7 @@
   },
   "exclude": [
     "./src/**/*.test.ts",
+    "./src/**/*.test.tsx",
+    "**/__tests__/**"
   ]
 }
