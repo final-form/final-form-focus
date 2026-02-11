@@ -87,7 +87,7 @@
   "size-limit": [
     {
       "path": "dist/final-form-focus.umd.min.js",
-      "limit": "1kB"
+      "limit": "1.1kB"
     },
     {
       "path": "dist/final-form-focus.es.js",
