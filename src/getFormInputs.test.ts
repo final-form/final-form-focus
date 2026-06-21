@@ -38,6 +38,27 @@ describe('getFormInputs', () => {
     expect(inputs.map(input => input.name)).toEqual(['firstName', 'lastName']);
   });
 
+  it('should scope same-name inputs to the requested form', () => {
+    document.body.innerHTML = `
+      <form name="firstForm">
+        <input type="text" name="email" />
+      </form>
+      <form name="secondForm">
+        <input type="text" name="email" />
+      </form>
+    `;
+
+    const firstInput = document.forms.namedItem('firstForm')!.elements.namedItem('email') as HTMLInputElement;
+    const secondInput = document.forms.namedItem('secondForm')!.elements.namedItem('email') as HTMLInputElement;
+    const firstFocus = jest.spyOn(firstInput, 'focus');
+    const secondFocus = jest.spyOn(secondInput, 'focus');
+
+    getFormInputs('secondForm')()[0].focus();
+
+    expect(firstFocus).not.toHaveBeenCalled();
+    expect(secondFocus).toHaveBeenCalled();
+  });
+
   it('should ignore unnamed inputs', () => {
     document.body.innerHTML = `
       <form name="testForm">

@@ -25,6 +25,7 @@ will attempt to apply focus to the first field with an error upon an attempted f
 * [Usage](#usage)
   * [🏁 Final Form Usage](#-final-form-usage)
   * [🏁 React Final Form Usage](#-react-final-form-usage)
+  * [Multiple Forms](#multiple-forms)
 * [Example](#example)
   * [Focus On Error Example](#focus-on-error-example)
 * [API](#api)
@@ -74,7 +75,7 @@ const undecorate = decorator(form)
 ```js
 import React from 'react'
 import { Form, Field } from 'react-final-form'
-import createDecorator from 'final-form-focus'
+import createDecorator, { getFormInputs } from 'final-form-focus'
 
 const focusOnErrors = createDecorator()
 ...
@@ -89,6 +90,27 @@ const focusOnErrors = createDecorator()
 
     </form>
   }
+/>
+```
+
+### Multiple Forms
+
+By default, `createDecorator()` searches all inputs in `document.forms`. If a page contains multiple forms with fields that share the same name, pass `getFormInputs(formName)` so each decorator only searches inputs from its own named `<form>`.
+
+```js
+import createDecorator, { getFormInputs } from 'final-form-focus'
+
+const focusOnFirstFormErrors = createDecorator(getFormInputs('firstForm'))
+const focusOnSecondFormErrors = createDecorator(getFormInputs('secondForm'))
+
+<Form
+  decorators={[focusOnSecondFormErrors]}
+  onSubmit={submit}
+  render={({ handleSubmit }) => (
+    <form name="secondForm" onSubmit={handleSubmit}>
+      ... inputs here ...
+    </form>
+  )}
 />
 ```
 
